@@ -2,15 +2,20 @@
 var weekDay = moment().format("ddd MMM Do, YYYY");
 $("#currentDay").text(weekDay);
 
-// var nineInput = document.getElementById('9amInput')
-// var nineBtn = document.getElementById('9amBtn')
+// Selects each input
+var inputEls = document.querySelectorAll('.input')
+// Selects each save button
+var saveEls = document.querySelectorAll('.save')
 
-var inputEls = document.getElementsByClassName('input')
-var saveEls = document.getElementsByClassName('save')
+function storeNote(e) {
+    e.stopPropagation();
 
-function storeNote(input, time) {
+    const button = e.target;
+    const time = button.dataset.time;
+    const input = e.target.parentElement.parentElement.childNodes[3].childNodes[0];
+
 	localStorage.setItem(time, input.value)
-	renderLocal();
+	// renderLocal();
 }
 
 // Determines if item in local storage has a value
@@ -24,16 +29,10 @@ function renderLocal(input, time) {
 	}
 }
 
-console.log(inputEls)
-
-// saveEls.forEach(input => input.addEventListener('click', renderLocal(input, input.dataset.time)));
-
-// saveEls.forEach(input => input.addEventListener('click', storeNote(input.dataset.time)));
-
-// nineBtn.addEventListener('click', storeNote)
-
 for (i=0; i < saveEls.length; i++) {
 renderLocal(inputEls[i], saveEls[i].dataset.time)
 
-saveEls[i].addEventListener('click', storeNote(inputEls[i], saveEls[i].dataset.time))
+// saveEls[i].addEventListener('click', storeNote(inputEls[i], saveEls[i].dataset.time))
 }
+
+saveEls.forEach((btn) => btn.addEventListener("click", storeNote));
