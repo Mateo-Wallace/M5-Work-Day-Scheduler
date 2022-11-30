@@ -31,7 +31,7 @@ While building this project I learned to:
 
 This is a deployed website so there is no true installation required
 
-1. Navigate to [example](#)
+1. Navigate to [mateo-wallace.github.io/M5-Work-Day-Scheduler/](https://mateo-wallace.github.io/M5-Work-Day-Scheduler/)
 
 ### Screenshot
 
