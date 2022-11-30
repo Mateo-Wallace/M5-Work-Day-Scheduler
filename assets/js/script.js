@@ -6,6 +6,8 @@ $("#currentDay").text(weekDay);
 var inputEls = document.querySelectorAll('.input')
 // Selects each save button
 var saveEls = document.querySelectorAll('.save')
+// Selects each row
+// var rowEls = document.querySelectorAll('.target-row')
 
 // saves user input to local storage
 function storeNote(e) {
@@ -13,7 +15,7 @@ function storeNote(e) {
 
     const button = e.target;
     const time = button.dataset.time;
-    const input = e.target.parentElement.parentElement.childNodes[3].childNodes[0];
+    const input = button.parentElement.parentElement.childNodes[3].childNodes[0];
 
 	localStorage.setItem(time, input.value)
 }
@@ -29,10 +31,20 @@ function renderLocal(input, time) {
 	}
 }
 
+function colorChange(button) {
+    const time = +button.dataset.time
+    var currentTime = moment().format('H')
+    console.log(currentTime)
+}
+
+// loops through each row, changes color based on if time is in past or future
+saveEls.forEach((button) => colorChange(button))
+
 // Renders locally stored values for each input
 for (i=0; i < saveEls.length; i++) {
 renderLocal(inputEls[i], saveEls[i].dataset.time)
 }
 
 // Adds event listener to each save button
-saveEls.forEach((btn) => btn.addEventListener("click", storeNote));
+saveEls.forEach((button) => button.addEventListener("click", storeNote));
+
